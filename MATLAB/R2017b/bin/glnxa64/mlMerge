@@ -1,0 +1,8 @@
+#!/bin/sh
+# Copyright 2016 The MathWorks, Inc.
+MYPATH=$(dirname "$0")
+LINK_CLIENT="$MYPATH"/diffLinkClient
+
+MERGE_MAIN=com.mathworks.toolbox.difflink.client.MergeClientApplication
+
+"$LINK_CLIENT" "$MERGE_MAIN" "$1" "$2" "$3" "$4"

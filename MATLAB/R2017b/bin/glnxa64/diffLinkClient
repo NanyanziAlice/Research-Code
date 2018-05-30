@@ -1,0 +1,26 @@
+#!/bin/sh
+# Copyright 2016 The MathWorks, Inc.
+MYPATH=$(dirname "$0")
+ML_ROOT="$MYPATH"/../../
+
+# Resolve the relative path to an absolute path name
+ML_ROOT=`cd $ML_ROOT;pwd`
+
+# Source (using .) the archlist and arch utility scripts to set the arch variable $ARCH
+. "$ML_ROOT/toolbox/shared/comparisons/private/archlist.sh"
+. "$ML_ROOT/bin/util/arch.sh"
+
+JAVA="$ML_ROOT"/sys/java/jre/$ARCH/jre/bin/java
+
+PATCH="$ML_ROOT"/java/patch
+LINK_JAR="$ML_ROOT"/java/jar/toolbox/difflink/client.jar
+UTIL_JAR="$ML_ROOT"/java/jar/toolbox/difflink/util.jar
+MW_UTIL_JAR="$ML_ROOT"/java/jar/util.jar
+COMP_UTILS_JAR="$ML_ROOT"/java/jar/toolbox/shared/computils.jar
+COMPARISONS_JAR="$ML_ROOT"/java/jar/comparisons.jar
+COLLECTIONS_GENERIC_JAR="$ML_ROOT"/java/jarext/commons-collections-generic.jar
+#-Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=4000,suspend=y
+"$JAVA" "-Xms8m" "-Xmx16m" -cp "$PATCH:$LINK_JAR:$COLLECTIONS_GENERIC_JAR:$COMP_UTILS_JAR:$UTIL_JAR:$MW_UTIL_JAR:$COMPARISONS_JAR" "$1" "$ML_ROOT" "$2" "$3" "$4" "$5" 
+
+
+
