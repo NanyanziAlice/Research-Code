@@ -9,7 +9,7 @@
 %fifth&sixth  : cordinates of the extreme corner points to be deleted
 
 
-s =[0,1,2,3];                                                                    %list of leading coefficients 
+s =[0,1,2,3,4,5];                                                                    %list of leading coefficients 
 egGlass     = computeFeatureVectorObject(s,'glass/obj18__','.png',90,4,3);   %compute feature vector for each of the eight objects
 egToy       = computeFeatureVectorObject(s,'toys/obj48__','.png',55,4,4); 
 egBowl      = computeFeatureVectorObject(s,'bowls/obj25__','.png',150,5,4);

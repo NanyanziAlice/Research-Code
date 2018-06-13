@@ -1,7 +1,7 @@
 img = imread(strcat('birds/obj74__',num2str(0),'.png'));
-thr=adjust_thresh(img);
+%thr=adjust_thresh(img);
 im=rgb2gray(img);
-[cim,r,c]= harris4(im,2,30,2);
+[cim,r,c]= harris1(im,2,30,2);
 % Delaunay triangulation
 %tri = delaunay(c,r);
 cod = [c(:), r(:)];

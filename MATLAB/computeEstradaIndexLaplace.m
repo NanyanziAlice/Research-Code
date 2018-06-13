@@ -1,19 +1,16 @@
+% arguments to the  computeEstradaIndexMellin() function %%%%%%%%
 
-%PCA analysis based on leading eigenvalues of Normalised Laplacian %%%%%%
-
-
-% arguments to the computeFeatureVecNorm() function %%%%%%%%
-
-%first: directory of object/image
-%second  : image type
-%third  : number of points/vertices of Delanay graph
-%fourth&fifth  : cordinates of the extreme corner points to be deleted
+%first        : Laplace exponent,s
+%second       : directory of object/image
+%third        : image type
+%fourth       : number of points/vertices of Delanay graph
+%fifth&sixth  : cordinates of the extreme corner points to be deleted
 
 
 
-function zVal = computeZetaDerOrigin(direc,imagetype, thres, rup, rdown)
+function zVal = computeEstradaIndexLaplace(lam,direc,imagetype, thres, rup, rdown)
     numview = (0:5:355);                                        % list of view angles
-    zVal = [] ;                        % initialise matrix to contain feature vectors
+    zVal = [] ;                                                 % initialise matrix to contain feature vectors
     cc=1;                                                       % initialise column index
     
     for i = numview
@@ -35,15 +32,22 @@ function zVal = computeZetaDerOrigin(direc,imagetype, thres, rup, rdown)
         g = digraph(tri, tri(:, [2 3 1]));
         A = adjacency(g);
         A = sparse(A | A');
-        Ln = computeNormalisedLap(A);
+        %Extract graph
+        G = graph(A);
+        
+        %compute Mellin based Laplacian and Adjacency
+        [L,A] = computeLaplace(G,lam);
+        
+        %compute Normalised Mellin Laplacian
+        Ln = computeNormalisedLap(full(A));
         
         %column vector of eigenvalues of Laplacian
         eg = sort(eig(full(Ln)));
         zSum= 0;
         
         %compute zeta derivative at origin  
-        for k = 2 : length(eg)
-            zSum = zSum+ (-log(eg(k)));
+        for k = 1 : length(eg)
+            zSum = zSum + (exp(eg(k)));
         end
         
         %build matrix to contain results
