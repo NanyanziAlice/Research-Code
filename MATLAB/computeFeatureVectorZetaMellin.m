@@ -51,7 +51,7 @@ function egMat = computeFeatureVectorZetaMellin(smellin,s,direc,imagetype, thres
         eg = sort(eig(Ln));                        % sort in non-decresing order
         eg = eg(2:end,:);                          %eliminate the zero eigenvalue
         
-        egvec = zeros(slen,1);                     %initialise row vector to capture computed zeta values
+        egvec = zeros(1,slen);                     %initialise row vector to capture computed zeta values
         ct = 1;                                    % set column index
         
         %compute zeta functions
@@ -63,6 +63,7 @@ function egMat = computeFeatureVectorZetaMellin(smellin,s,direc,imagetype, thres
         
         %append result to matrix
         egMat(:,cc) = egvec;
+        % egMat(:,cc) = eg;
         cc = cc+1;
     end
 end

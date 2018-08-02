@@ -39,8 +39,10 @@ function egMat = computeFeatVecNormSymm(s,direc,imagetype, thres, rup, rdown)
         %column vector of eigenvalues of Laplacian
         eg = sort(eig(Ln), 'descend');                %sort eigenvalues in descending order
         eg = eg(1:s,:);                               % select s leading eigenvalues
+        %eg = sort(eig(Ln));
+        %eg = eg(2:end,:);
         egsym = computeSymmetricPoly(eg);             % compute symmetric matrix
-        
+        %size(egsym)
         %build pattern vector matrix
         egMat(:,cc) = egsym;
         cc = cc+1;

@@ -1,9 +1,9 @@
 %toys/obj48__
 %bowls/obj25__
-img = imread(strcat('bowls/obj25__',num2str(0),'.png'));
-%thr=adjust_thresh(img);
+img = imread(strcat('bowls/obj25__',num2str(185),'.png'));
+thr=adjust_thresh(img);
 im=rgb2gray(img);
-[cim,r,c]= harris1(im,1,30,2);
+[cim,r,c]= harris4(im,1,30,2);
 % Delaunay triangulation
 %tri = delaunay(c,r);
 cod = [c(:), r(:)];

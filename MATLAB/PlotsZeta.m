@@ -14,14 +14,14 @@ z_num = (1:72);                                                          % list 
 %%%%%%%%%%%%%%%%%%% p=1 %%%%%%
 p = 1;                                                       %set s paprameter of the zeta function
 
-zGlass     = computeZeta(p,'glass/obj18__','.png',90,4,3);       % compute zeta for object 1-glass
-zToy       = computeZeta(p,'toys/obj48__','.png',55,4,4);    % compute zeta for object 2-toy 
-zBowl      = computeZeta(p,'bowls/obj25__','.png',150,5,4);
-zCup       = computeZeta(p,'cups/obj11__','.png',40, 8,7);
-zBottle    = computeZeta(p,'bottles/obj50__','.png',40,3,3);
-zContainer = computeZeta(p,'container/obj70__','.png',70, 3, 5);
-zBirds     = computeZeta(p,'birds/obj74__','.png',60, 4, 4);
-zIcecream  = computeZeta(p,'icecream/obj72__','.png',80, 4,3);
+zGlass1     = computeZeta(p,'glass/obj18__','.png',90,4,3);       % compute zeta for object 1-glass
+zToy1       = computeZeta(p,'toys/obj48__','.png',55,4,4);    % compute zeta for object 2-toy 
+zBowl1      = computeZeta(p,'bowls/obj25__','.png',150,5,4);
+zCup1       = computeZeta(p,'cups/obj11__','.png',40, 8,7);
+zBottle1    = computeZeta(p,'bottles/obj50__','.png',40,3,3);
+zContainer1 = computeZeta(p,'container/obj70__','.png',70, 3, 5);
+zBirds1     = computeZeta(p,'birds/obj74__','.png',60, 4, 4);
+zIcecream1  = computeZeta(p,'icecream/obj72__','.png',80, 4,3);
 
 
 %%%%Plots %%%%

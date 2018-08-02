@@ -1,33 +1,36 @@
-%PCA analysis based on leading coefficients of Heat content (Normal Laplacian ) %%%%%%
 
+%%%%%%plots of derivative ofheat content function against view number %%%
+             %%%for normal laplacian%%%%
 
-% arguments to the computeFeatureVectorObjectNorm() function %%%%%%%%
-%first  : list of leading coefficients of Heat content (with normal Laplacian)
-%second  : directory of object/image
+% arguments to the computeFeatureVectorObject() function
+%first  : m
+%second : directory of image
 %third  : image type
-%forth  : number of points/vertices of Delanay graph
-%fifth&sixth  : cordinates of the extreme corner points to be deleted
+%fouth  : number of points/vertices of Delanay graph
+%fifth&sixth  : cordinates of the extreme corner points to be deleted  
 
+z_num = (1:72); 
+m=6;                                                          
 
-s =[0,1,2,3];                                                                    %list of leading coefficients 
-egGlass     = computeFeatureVectorObject(s,'glass/obj18__','.png',90,4,3);   %compute feature vector for each of the eight objects
-egToy       = computeFeatureVectorObject(s,'toys/obj48__','.png',55,4,4); 
-egBowl      = computeFeatureVectorObject(s,'bowls/obj25__','.png',150,5,4);
-egCup       = computeFeatureVectorObject(s,'cups/obj11__','.png',40, 8,7);
-egBottle    = computeFeatureVectorObject(s,'bottles/obj50__','.png',40,3,3);
-egContainer = computeFeatureVectorObject(s,'container/obj70__','.png',70,3,5);
-egBird      = computeFeatureVectorObject(s,'birds/obj74__','.png',60, 4, 4);
-egIcecream  = computeFeatureVectorObject(s,'icecream/obj72__','.png',80, 4,3);
+zGlass     = computeDerivativeHeatcontent(m,'glass/obj18__','.png',90,4,3);      
+zToy       = computeDerivativeHeatcontent(m,'toys/obj48__','.png',55,4,4);     
+zBowl      = computeDerivativeHeatcontent(m,'bowls/obj25__','.png',150,5,4);
+zCup       = computeDerivativeHeatcontent(m,'cups/obj11__','.png',40, 8,7);
+zBottle    = computeDerivativeHeatcontent(m,'bottles/obj50__','.png',40,3,3);
+zContainer = computeDerivativeHeatcontent(m,'container/obj70__','.png',70, 3, 5);
+zBirds     = computeDerivativeHeatcontent(m,'birds/obj74__','.png',60, 4, 4);
+zIcecream  = computeDerivativeHeatcontent(m,'icecream/obj72__','.png',80, 4,3);
+
 
 % Building the data matrix S where each column is the feature vector of
 % respective graph G_k
 
 S = [egGlass egToy egBowl egCup egBottle egContainer egBird egIcecream]; 
 
-St = S';                              % transpose matrix so that obsercvations as rows a dimensions are ccolumns
+St  = S';                              % transpose matrix so that obsercvations as rows a dimensions are ccolumns
 Smm =  St - mean(St);                 % normalise data by subtracting the mean                                               
-V = pca(St);                          % perform pca on raw data;  pca first normalises the data 
-Vs = V(:,1:3);                        % select the first 3 principal components
+V   = pca(St);                          % perform pca on raw data;  pca first normalises the data 
+Vs  = V(:,1:3);                        % select the first 3 principal components
 B_new = Vs'* Smm';                    % new data as mapped to the principal components
 
 

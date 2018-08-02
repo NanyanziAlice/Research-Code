@@ -1,17 +1,19 @@
-%%%%%%%%%function to compute heat content
-            %%%%%%%%%(Normalised Laplacian)%%%%
-%%%% Arguments of the function %%%%%
-%%% 1st: time, t 
-%%% 2nd: directory of images
-%%% 3rd: image type
-%%% 4th: number of points/vertices of Delanay graph
-%%% 5th&6th: cordinates of the extreme corner points to be deleted 
+
+%PCA analysis based on leading eigenvalues of Normalised Laplacian %%%%%%
 
 
-function Qcoeff = computeHeatContent(t,direc,imagetype, thres, rup, rdown)
+% arguments to the computeFeatureEnergy() function %%%%%%%%
 
+%first: directory of object/image
+%second  : image type
+%third  : number of points/vertices of Delanay graph
+%fourth&fifth  : cordinates of the extreme corner points to be deleted
+
+
+
+function zVal = computeFeatureEnergy(direc,imagetype, thres, rup, rdown)
     numview = (0:5:355);                                        % list of view angles
-    Qcoeff = zeros(length(t),length(numview));                          % initialise matrix to contain feature vectors
+    zVal = [] ;                        % initialise matrix to contain feature vectors
     cc=1;                                                       % initialise column index
     
     for i = numview
@@ -33,18 +35,19 @@ function Qcoeff = computeHeatContent(t,direc,imagetype, thres, rup, rdown)
         g = digraph(tri, tri(:, [2 3 1]));
         A = adjacency(g);
         A = sparse(A | A');
-        Ln = computeNormalisedLap(full(A));
+        %Ln = computeNormalisedLap(A);
+        Ln = diag(sum(A))-A;
+        %column vector of eigenvalues of Laplacian
+        eg = sort(eig(full(Ln)));
+        zSum= 0;
         
-        %compute heat content
-        j=1;
-        qval = zeros(length(t),1);
-        for tt = t
-            qval(j,:) = sum(sum(expm(-tt*full(Ln))));
-            j=j+1;
+        %compute zeta derivative at origin  
+        for k = 2 : length(eg)
+            zSum = zSum+ (eg(k))^2;
         end
-        %build matrix
-        Qcoeff(:,cc) = qval;
+        
+        %build matrix to contain results
+        zVal(cc,:) = zSum;
         cc = cc+1;
     end
-
 end

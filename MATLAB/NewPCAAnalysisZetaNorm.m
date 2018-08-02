@@ -14,7 +14,7 @@
 %%% 5th&6th: cordinates of the extreme corner points to be deleted  
 
 
-s = [0,1,2,3,4,5];                                                                %size of the leading eigenvalues
+s = [1,2,3,4];                                                                %size of the leading eigenvalues
 egGlass     = computeFeatureVectorZetaNorm(s,'glass/obj18__','.png',90,4,3); %compute feature vector for each of the eight objects
 egToy       = computeFeatureVectorZetaNorm(s,'toys/obj48__','.png',55,4,4); 
 egBowl      = computeFeatureVectorZetaNorm(s,'bowls/obj25__','.png',150,5,4);

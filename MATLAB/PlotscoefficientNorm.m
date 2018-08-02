@@ -9,7 +9,7 @@
 %fifth&sixth  : cordinates of the extreme corner points to be deleted  
 
 z_num = (1:72);                                                            % list of view numbers
-q = [0,1,2,3,4,5];                                                             
+q = [1,2,3,4];                                                             
 
 zGlass     = computeFeatureVectorObjectNorm(q,'glass/obj18__','.png',90,4,3);      
 zToy       = computeFeatureVectorObjectNorm(q,'toys/obj48__','.png',55,4,4);     
@@ -20,6 +20,7 @@ zContainer = computeFeatureVectorObjectNorm(q,'container/obj70__','.png',70, 3, 
 zBirds     = computeFeatureVectorObjectNorm(q,'birds/obj74__','.png',60, 4, 4);
 zIcecream  = computeFeatureVectorObjectNorm(q,'icecream/obj72__','.png',80, 4,3);
 
+%%%%Plots for q_1%%%%
 
 figure(1)
 plot(z_num, zGlass(1,:), 'c',...
@@ -31,8 +32,8 @@ plot(z_num, zGlass(1,:), 'c',...
      z_num,zBirds(1,:), 'r',...
      z_num,zIcecream(1,:),'k')  
 xlabel('View number') % x-axis label
-ylabel('q_0') % y-axis label
-legend('object1','object2','object3','object4','object5','object6','object7', 'object8')
+ylabel('q_1') % y-axis label
+legend('Glass','Toy','Bowl','Cup','Bottle','Container','Birds', 'Icecream')
 
 
 %%%%Plots for q_2%%%%
@@ -47,8 +48,8 @@ plot(z_num, zGlass(2,:), 'c',...
      z_num,zBirds(2,:), 'r',...
      z_num,zIcecream(2,:),'k')  
 xlabel('View number') % x-axis label
-ylabel('q_1') % y-axis label
-legend('object1','object2','object3','object4','object5','object6','object7', 'object8')
+ylabel('q_2') % y-axis label
+legend('Glass','Toy','Bowl','Cup','Bottle','Container','Birds', 'Icecream')
 
 
 %%%%Plots for q_3 %%%%
@@ -63,8 +64,8 @@ plot(z_num, zGlass(3,:), 'c',...
      z_num,zBirds(3,:), 'r',...
      z_num,zIcecream(3,:),'k')  
 xlabel('View number') % x-axis label
-ylabel('q_2') % y-axis label
-legend('object1','object2','object3','object4','object5','object6','object7', 'object8')
+ylabel('q_3') % y-axis label
+legend('Glass','Toy','Bowl','Cup','Bottle','Container','Birds', 'Icecream')
 
 %%%%Plots for q_4 %%%%
 
@@ -78,36 +79,5 @@ plot(z_num, zGlass(4,:), 'c',...
      z_num,zBirds(4,:), 'r',...
      z_num,zIcecream(4,:),'k')  
 xlabel('View number') % x-axis label
-ylabel('q_3') % y-axis label
-legend('object1','object2','object3','object4','object5','object6','object7', 'object8')
-
-%%%%Plots for q_4 %%%%
-
-figure(5)
-plot(z_num, zGlass(5,:), 'c',...
-     z_num, zToy(5,:), 'g',...,
-     z_num,zBowl(5,:), 'b',...
-     z_num,zCup(5,:), 'c',...            
-     z_num,zBottle(5,:),'m',...
-     z_num,zContainer(5,:),'y',...
-     z_num,zBirds(5,:), 'r',...
-     z_num,zIcecream(5,:),'k')  
-xlabel('View number') % x-axis label
 ylabel('q_4') % y-axis label
-legend('object1','object2','object3','object4','object5','object6','object7', 'object8')
-
-
-%%%%Plots for q_4 %%%%
-
-figure(6)
-plot(z_num, zGlass(6,:), 'c',...
-     z_num, zToy(6,:), 'g',...,
-     z_num,zBowl(6,:), 'b',...
-     z_num,zCup(6,:), 'c',...            
-     z_num,zBottle(6,:),'m',...
-     z_num,zContainer(6,:),'y',...
-     z_num,zBirds(6,:), 'r',...
-     z_num,zIcecream(6,:),'k')  
-xlabel('View number') % x-axis label
-ylabel('q_5') % y-axis label
-legend('object1','object2','object3','object4','object5','object6','object7', 'object8')
+legend('Glass','Toy','Bowl','Cup','Bottle','Container','Birds', 'Icecream')

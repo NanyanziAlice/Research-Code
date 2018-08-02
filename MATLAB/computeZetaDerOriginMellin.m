@@ -1,17 +1,17 @@
-%%%%%%%%%function to compute heat content
-            %%%%%%%%%(Normalised Laplacian)%%%%
-%%%% Arguments of the function %%%%%
-%%% 1st: time, t 
-%%% 2nd: directory of images
-%%% 3rd: image type
-%%% 4th: number of points/vertices of Delanay graph
-%%% 5th&6th: cordinates of the extreme corner points to be deleted 
+
+% arguments to the computeFeatureVecNorm() function %%%%%%%%
+
+%first :  Mellin exponent
+%second: directory of object/image
+%third : image type
+%fourth  : number of points/vertices of Delanay graph
+%fifth&sixth  : cordinates of the extreme corner points to be deleted
 
 
-function Qcoeff = computeHeatContent(t,direc,imagetype, thres, rup, rdown)
 
+function zVal = computeZetaDerOriginMellin(smellin,direc,imagetype, thres, rup, rdown)
     numview = (0:5:355);                                        % list of view angles
-    Qcoeff = zeros(length(t),length(numview));                          % initialise matrix to contain feature vectors
+    zVal = [] ;                        % initialise matrix to contain feature vectors
     cc=1;                                                       % initialise column index
     
     for i = numview
@@ -33,18 +33,27 @@ function Qcoeff = computeHeatContent(t,direc,imagetype, thres, rup, rdown)
         g = digraph(tri, tri(:, [2 3 1]));
         A = adjacency(g);
         A = sparse(A | A');
+        
+        %Extract graph
+        G = graph(A);
+        
+        %compute Mellin based Laplacian and Adjacency
+        [L,A] = computeMellin(G,smellin);
+        
+        %compute Normalised Mellin Laplacian
         Ln = computeNormalisedLap(full(A));
         
-        %compute heat content
-        j=1;
-        qval = zeros(length(t),1);
-        for tt = t
-            qval(j,:) = sum(sum(expm(-tt*full(Ln))));
-            j=j+1;
+        %column vector of eigenvalues of Laplacian
+        eg = sort(eig(full(Ln)));
+        zSum= 0;
+        
+        %compute zeta derivative at origin  
+        for k = 2 : length(eg)
+            zSum = zSum+ (-log(eg(k)));
         end
-        %build matrix
-        Qcoeff(:,cc) = qval;
+        
+        %build matrix to contain results
+        zVal(cc,:) = zSum;
         cc = cc+1;
     end
-
 end
